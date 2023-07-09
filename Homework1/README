@@ -1,0 +1,89 @@
+Mihai Dragos-Andrei
+Grupa 322CB
+
+
+Prob. 1)	
+	La prima problema am ales o abordare ce se bazeaza pe alegerea a 2 variabile(low,high) ce reprezinta cel mai mare numar din sir, respectiv 
+suma tuturor elementelor din sir. Dupa ce am setat aceste limite pornesc o cautare binara in care incerc sa incadrez fiecare greutate din feriboturi
+cu media acestor 2 variabile. In cazul in care nu reusesc sa umplu toate feriboturile inseamna ca mi-am ales o medie prea mare si pornesc iar cautarea 
+binara in care inlocuiesc valoarea variabilei 'high' cu 'medium'. In cazul in care am avut nevoie de mai multe feriboturi inseamna ca am ales o 
+medie prea mare asa ca voi porni iar cautarea binara in care inlocuiesc variabila 'low' cu 'medium+1'. 
+	
+	a) Complexitatea spatiala este O(1), deoarece nu ma folosesc de nicio structura auxiliara, ci doar de variabile.
+	b) Complexitatea temporala este O(nlogn), deoarece folosesc cautare binare O(logn) si de fiecare data iterez prin vector cu O(n).
+
+Prob 2)
+	Task 1: La primul task am sortat cu mergesort in ordine descrescatoare cei doi vectori. Am iterat prin fiecare in paralel si am selector
+primele n elemente din cei doi vectori pentru a le adauga la suma. In momentul in care am selectat un element am crescut doar index-ul vectorului
+din care l-am selectat.
+	
+	a) Complexitatea spatiala a acestui task este O(1), deoarece nu mi-am generat nicio structura auxiliara.
+	b) Complexitatea temporala a acestui task este de O(nlogn), ce provine din complexitatea mergesort-ului care este O(nlogn) si complexitatea
+iteratiei din vectori care este O(n). Cum cele doua actiuni sunt independente una fata de cealalta complexitatile lor se vor aduna: O(nlogn)+O(n)=O(nlogn).
+	
+	Task 2: La acest task am contruit 2 vectori auxiliari in care am stocat cel mai mare element, respectiv cel mai pic element din fiecare
+pereche. Am sortat acesti 2 vectori cu mergesort in ordine descrescatoare. Am iterat pe la incepului vectorului de numere minime si la sfarsitul
+vectorului de numere maxime si le am interschimbat pe primele 'k' in cazul in care respectau continia. In cele din urma am obtinut un vector cu 
+cele mai mari numere, folosid doar 'k' numari posibile.
+
+	a) Complexitatea spatiala a acestui task este 2*O(n), deoarece imi generez 2 vectori auxiliari de lungime n. 
+	b) Complexitatea temporala a acestui task este de O(nlogn), deoarece ma folosec de mergesort care are complexitate de O(nlogn). Iterez 
+prin fiecare vector pentru a selecta valoarea maxima si minima din fiecare pereche cu complexitate 2*O(n). Iterez prin vectorii auxiliari cu 
+complexitate O(k). Cum toate eceste actiuni sunt independente una fata de cealalta si imi este garantat faptul ca k<=n 
+rezulta: O(nlogn)+2*O(n)+O(k)= O(nlogn)
+
+	Surse folosite: https://www.geeksforgeeks.org/merge-sort/
+
+Prob 3)
+	Task 1: La acest task m-am folosit de o problema clasica de programare dinamica "0/1 Knapsack Problem". Mi-am construit o metrice in care
+elementele de pe linia 'i' reprezinta platourile de pana la al 'i'-lea platou pe care le pot lua in considerare la nota finala. Coloanele reprezinta
+preturile maxime acceptate pana in acel punct. Elementul in sine din matrice reprezinta suma notelor tuturor platourilor adaugate in matrice. 
+Cand linia sau coloana este 0 o sa initializez valoare din matrice cu 0. In cazul in care pretul este prea mare decat valoarea 'j' acceptata in acel
+moment voi initializa cu valoarea anterioara. La final voi alege daca e rentabil sau nu sa adaug platoul la nota finala.
+		
+		a) Complexitatea spatiala este de O(m*x*n), deoarece ma folosesc de o matrice cu m+1 linii si x*n+1 coloane.
+		b) Complexitatea temporala este de O(m*x*n*m), deoarece iterez printr-o matrice de m+1 linii si x*n+1 coloane. De asemenea pentru
+fiecare element adaugat trebuie sa calculez si nota specifica care are complexitatea O(m). Cum aceste evenimente nu sunt 
+independente: O(m*(x*n))*O(m) = O(m*m*x*n)
+
+	Surse folosite :  https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/
+
+	Task 2: La acest task am aplicat aceeasi strategie ca la cel anterior doar ca am dublat vectorul de preturi si matricea de note cu aceeasi
+elemente de pana acum. La final am returnat rezultatul returnat de functia task1().
+		
+		a) Complexitatea spatiala este de 2*O(m)+2*O(m*x*n)+O(m*x*n), deoarece ma folosesc de un vector auxiliar de lungime 2*m pentru 
+a creste marimea vectorului de preturi si de o matrice auxiliara pentru a creste marimea matricei de note. Ultima complexitate provine de la matricea 
+dp initializata in functia task1()
+		b) Complexitatea temporala este O(m*m*x*n), deoarece execut aceeasi idee ca la teskul precedent doar ca dublez si iterez prin vectorii
+noi auxiliari. Aceasta procedura de iteratir are complexitatea de O(2*m) respectiv O(2*x*n) si se produc independent intre ele si fata de functia task1()
+
+	Task 3: Ideea care se bazeaza rezolvarea acestui task este o problema clasica de programare dinamica "Extended Knapsack Problem". Am pastrat
+aceeasi idee la baza ca la task-ul 1, dar am mai adaugat un nivel in matrice pentru numarul maxim de platouri pe care le pot adauga in nota.
+
+		a) Complexitatea spatiala este O(m*m*x*n) + O(n*m*x*n), deoarece ma folosesc de aceleasi vectori si matrice dublate de la task2 si 
+de la noua matrice in 3 dimensiuni.
+		b) Complexitatea temporala este O(n*m*x*n), deoarece iterez printr-o matrice de 3 dimensiuni cu m+1 linii, x*n+1 coloane, si n inaltimi.
+
+	Surse folosite: https://www.geeksforgeeks.org/extended-knapsack-problem/
+
+Prob. 4)
+	Task 1: La cest task am abordat o medota de programare dinamica si m-am folosit de o matrice ajutatoare ce are rolul de a imi retine toate
+combinatiile posibile de semnal cu 'i' de 0 si 'j' de 1. Am construit aceasta matrice pe foaie si am cautat un pattern pentru a putea sa o compun.
+Acesta se bazeaza pe initializarea primelor 2 linii si coloane si construirea celorlalte elemente pe baza a 2 elemente anterioare.
+
+		a) Complexitatea spatiala este O(x*y), deoarece ma folosesc de o matrice ajutatoare cu x+1 linii si y+1 coloane
+		b) Complexitatea temporala este O(x*y), deoarece iterez prin matricea ajutatoare si afisez la final un element specific
+
+	Task 2: La acest task am abordat aceeasi strategie ca la task-ul precedent, dar am schimbat pattern-ul de construire al matricii.
+Acesta se bazeaza pe initializarea primelor 2 linii si coloane si construirea tuturor elementelor de baza sumei a 3 numere anterioare.
+
+		a) Complexitatea spatiala este O(x*y), deoarece ma folosesc de o matrice ajutatoare cu x+1 linii si y+1 coloane
+		b) Complexitatea temporala este O(x*y), deoarece iterez prin matricea ajutatoare si afisez la final un element specific
+
+Prob. 5)
+	Abordarea acestei probleme a plecat de la observatia faptului ca fiecare permutare si transformare de forma 'nnn' in 'mn' este la baza un numar al lui fibonacci. Am construit
+un vector care are rolul sa stocheze fiecare numar ce reprezinta toate numerele de acelasi tip consecutive. Am construit, de asemenea, si un hashTable care are rolul sa imi salveze fiecare 
+valoare deja calculata a numerelor lui fibonacci. 
+
+		a) Complezitatea spatiala este de O(n+max number), deoarece mi-am construit un vector auxiliar O(n) si un hashTable O(max number), unde n este numarul de perechi consecutive.
+		b) Complexitatea temporala este de O(n*max number), deoarece iterez prin vectorul auxiliat cu O(n) si ma folosesc de functia fibonacci pentru a calcula fiecare numar in parte cu O(max number).
