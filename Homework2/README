@@ -1,0 +1,29 @@
+Mihai Dragos-Andrei
+Grupa 322CB
+
+Problem 1:
+	This problem is based on Kahn's algorithm. We used two identical arrays of nodes and one priority queues as structures. I chose to apply khan's algorithm twice on the same
+node array because I couldn't find another method that could select to start with set 1 or set 2 nodes and guarantee to return the best answer, therefore I chose to calculate by both methods 
+and selected the minimum answer.
+	Time complexity is O(2*(n+m)), because I made Khan's algorithm twice.
+	Space complexity is O(2*n*sizeof(Object Node)).
+
+Sources: https://www.google.com/search?q=khan+algorithm+yt&oq=khan+algorithm+yt&aqs=chrome..69i57j0i22i30l3j0i10i22i30j0i22i30l5.17546j0j7&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:daff1c68,vid:cIBFEhD77b4
+
+Problem 2:
+	This problem is based by Tarjan's algorithm. I use it to find every strong connected components (SCC) of the graph. The mainly idea of the program
+based by parent array which count for each SCC id that it had other SCC went through him. The answer is based by count each id which had in parents array value 0,
+that means it hadn't any other access ti him.
+    Time complexity is O(n+m), because program is based by Tajan's algorithm.
+    Space complexity is O(n), because I used List<List<Integer> which had n Integer values, one stack that contain n Integers
+and 3 arrays of size n.
+
+Sources: https://www.geeksforgeeks.org/connected-components-in-an-undirected-graph/
+         https://www.google.com/search?q=tarjan+algorithm+yt&oq=tarjan+algo&aqs=chrome.2.69i57j35i39i650j35i39j0i512j0i67i650j0i512l5.3486j0j7&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:4b5cfd45,vid:TyWtx7q2D7Y
+
+Problem 4:
+    This problem is based by one dfs traversal. For the first example '0-magazin.in' my dfsOrder looks like: 1 2 3 5 7 8 6 4.
+In case I read question '1 5' I'm going to write the node at 5 units away. In case I have to select a node out of size
+I'm going to write -1. I case start node has 5 children and I have to select a node at 7 units away I'm going to write -1.
+    Time complexity is O(n+q).
+    Space complexity is O(2*n*sizeof(Object Node)).
